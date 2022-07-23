@@ -3,6 +3,7 @@
 // panggil controller Siswa
 use App\Http\Controllers\SiswaController;
 // panggil controller Barang
+use App\Http\Controllers\WaliController;
 use App\Http\Controllers\BarangController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,4 +37,5 @@ Route::group(['prefix' => 'admin','middleware'=>['auth']],
         return view('admin.index');
     });
     Route::resource('barang', BarangController::class);
+    Route::resource('wali', WaliController::class);
 });
