@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Wali;
+use App\Models\Barang;
+
 
 class WaliController extends Controller
 {
@@ -27,7 +29,7 @@ class WaliController extends Controller
     public function create()
     {
         $barang = Barang::all();
-        return view('wali.index', compact('barang'));
+        return view('wali.create', compact('barang'));
     }
 
     /**
@@ -41,7 +43,7 @@ class WaliController extends Controller
         $validated = $request->validate([
             'nama' => 'required',
             'id_barang' => 'required|unique:walis',
-            'foto' => 'required|image|max:2048',
+            'foto' => 'required|image|max:2048'
         ]);
 
         $wali = new Wali();
@@ -95,7 +97,7 @@ class WaliController extends Controller
         $validated = $request->validate([
             'nama' => 'required',
             'id_barang' => 'required|unique:walis',
-            'foto' => 'required|image|max:2048',
+            'foto' => 'required|image|max:2048'
         ]);
 
         $wali = Wali::findOeFile($id);
@@ -123,7 +125,7 @@ class WaliController extends Controller
     {
         $wali = Wali::findOrFail($id);
         $wali->deleteImage();
-        $article->delete();
+        $wali->delete();
         return redirect()->route('wali.index')
         ->with('Success', 'Data Berhasil Dihapus!');
     }
